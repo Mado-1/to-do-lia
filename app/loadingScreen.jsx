@@ -1,11 +1,9 @@
-// LoadingScreen.tsx
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // 👈 lägg till detta
 import { Calendar } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 const LoadingScreen = () => {
-  const navigation = useNavigation(); // 👈 skapa navigation hook
 
   const spinValue = useRef(new Animated.Value(0)).current;
   const pulseValue = useRef(new Animated.Value(0)).current;
@@ -51,12 +49,16 @@ useEffect(() => {
   ).start();
 }, [pulseValue]);
 
+
+const router = useRouter();
+
 useEffect(() => {
   const timer = setTimeout(() => {
-    navigation.replace('Home');
+    router.replace("/(dashboard)");
   }, 3000);
   return () => clearTimeout(timer);
-}, [navigation]);
+}, [router]);
+
 
 
   const spin = spinValue.interpolate({
