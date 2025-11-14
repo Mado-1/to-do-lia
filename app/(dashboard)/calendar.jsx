@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Header from "../../components/Home/Header";
 
 export default function ActivityTimeline() {
   const [expandedActivity, setExpandedActivity] = useState(null);
@@ -7,46 +14,40 @@ export default function ActivityTimeline() {
   const activities = [
     {
       id: 1,
-      date: 'Tomorrow',
+      date: "Tomorrow",
       count: 1,
       items: [
         {
-          time: '5:30 PM',
-          timeUntil: 'in 1d',
-          title: 'Swimming Lesson',
-          icon: '⚽',
+          time: "5:30 PM",
+          timeUntil: "in 1d",
+          title: "Swimming Lesson",
+          icon: "⚽",
           tags: [
-            { label: 'Svenska Lag', color: '#a855f7' },
-            { label: 'sports', color: '#e5e7eb' }
+            { label: "Svenska Lag", color: "#a855f7" },
+            { label: "sports", color: "#e5e7eb" },
           ],
-          location: 'Eriksdalsbadet',
-          person: 'Oscar',
-          duration: '60 minutes',
-          leaveTime: 'Leave at 5:10 PM',
+          location: "Eriksdalsbadet",
+          person: "Oscar",
+          duration: "60 minutes",
+          leaveTime: "Leave at 5:10 PM",
           packing: {
-            title: 'Packing checklist (4 items)',
-            items: ['Swimsuit', 'Towel', 'Goggles', '+1 more']
-          }
-        }
-      ]
+            title: "Packing checklist (4 items)",
+            items: ["Swimsuit", "Towel", "Goggles", "+1 more"],
+          },
+        },
+      ],
     },
     {
       id: 2,
-      date: 'Friday, Nov 14',
+      date: "Friday, Nov 14",
       count: 0,
-      items: []
-    }
+      items: [],
+    },
   ];
 
   return (
     <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Unstressable</Text>
-        <Text style={styles.subtitle}>
-          Your AI-powered family assistant - reducing stress, one activity at a time
-        </Text>
-      </View>
+      <Header />
 
       {/* Timeline Card */}
       <View style={styles.timelineCard}>
@@ -54,10 +55,14 @@ export default function ActivityTimeline() {
           <Text style={styles.timelineIcon}>📈</Text>
           <Text style={styles.timelineTitle}>Activity Timeline</Text>
         </View>
-        <Text style={styles.timelineSubtitle}>Visual timeline of your upcoming week</Text>
+        <Text style={styles.timelineSubtitle}>
+          Visual timeline of your upcoming week
+        </Text>
         <View style={styles.tipContainer}>
           <Text style={styles.tipIcon}>💡</Text>
-          <Text style={styles.tipText}>Tip: Tap on any activity for more details</Text>
+          <Text style={styles.tipText}>
+            Tip: Tap on any activity for more details
+          </Text>
         </View>
       </View>
 
@@ -73,7 +78,11 @@ export default function ActivityTimeline() {
             <TouchableOpacity
               key={index}
               style={styles.activityCard}
-              onPress={() => setExpandedActivity(expandedActivity === activity.time ? null : activity.time)}
+              onPress={() =>
+                setExpandedActivity(
+                  expandedActivity === activity.time ? null : activity.time
+                )
+              }
               activeOpacity={0.7}
             >
               <View style={styles.timeline}>
@@ -96,15 +105,14 @@ export default function ActivityTimeline() {
                   {activity.tags.map((tag, idx) => (
                     <View
                       key={idx}
-                      style={[
-                        styles.tag,
-                        { backgroundColor: tag.color }
-                      ]}
+                      style={[styles.tag, { backgroundColor: tag.color }]}
                     >
-                      <Text style={[
-                        styles.tagText,
-                        tag.color === '#a855f7' && styles.tagTextWhite
-                      ]}>
+                      <Text
+                        style={[
+                          styles.tagText,
+                          tag.color === "#a855f7" && styles.tagTextWhite,
+                        ]}
+                      >
                         {tag.label}
                       </Text>
                     </View>
@@ -133,7 +141,9 @@ export default function ActivityTimeline() {
 
                 <View style={styles.packingContainer}>
                   <Text style={styles.packingIcon}>📦</Text>
-                  <Text style={styles.packingTitle}>{activity.packing.title}</Text>
+                  <Text style={styles.packingTitle}>
+                    {activity.packing.title}
+                  </Text>
                   <View style={styles.packingItems}>
                     {activity.packing.items.map((item, idx) => (
                       <View key={idx} style={styles.packingItem}>
@@ -159,38 +169,38 @@ export default function ActivityTimeline() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: "#f3f4f6",
   },
   header: {
     padding: 20,
     paddingTop: 60,
-    backgroundColor: '#e8eaf0',
+    backgroundColor: "#e8eaf0",
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
-    color: '#1e3a8a',
+    fontWeight: "700",
+    color: "#1e3a8a",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#64748b',
+    color: "#64748b",
     lineHeight: 24,
   },
   timelineCard: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     margin: 16,
     padding: 20,
     borderRadius: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
   timelineHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   timelineIcon: {
@@ -199,18 +209,18 @@ const styles = StyleSheet.create({
   },
   timelineTitle: {
     fontSize: 20,
-    fontWeight: '700',
-    color: '#1f2937',
+    fontWeight: "700",
+    color: "#1f2937",
   },
   timelineSubtitle: {
     fontSize: 16,
-    color: '#9ca3af',
+    color: "#9ca3af",
     marginBottom: 16,
   },
   tipContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fef3c7',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fef3c7",
     padding: 12,
     borderRadius: 8,
   },
@@ -220,34 +230,34 @@ const styles = StyleSheet.create({
   },
   tipText: {
     fontSize: 14,
-    color: '#92400e',
+    color: "#92400e",
   },
   dayContainer: {
     marginHorizontal: 16,
     marginBottom: 16,
   },
   dayHeader: {
-    backgroundColor: '#dbeafe',
+    backgroundColor: "#dbeafe",
     padding: 16,
     borderRadius: 12,
     marginBottom: 8,
   },
   dayTitle: {
     fontSize: 20,
-    fontWeight: '600',
-    color: '#1e40af',
+    fontWeight: "600",
+    color: "#1e40af",
     marginBottom: 4,
   },
   activityCount: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: "#3b82f6",
   },
   activityCard: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
     borderRadius: 16,
     padding: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -255,33 +265,33 @@ const styles = StyleSheet.create({
   },
   timeline: {
     width: 24,
-    alignItems: 'center',
+    alignItems: "center",
     marginRight: 16,
   },
   timelineDot: {
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#3b82f6',
+    backgroundColor: "#3b82f6",
     marginBottom: 8,
   },
   timelineLine: {
     flex: 1,
     width: 2,
-    backgroundColor: '#dbeafe',
+    backgroundColor: "#dbeafe",
   },
   activityContent: {
     flex: 1,
   },
   activityTime: {
     fontSize: 22,
-    fontWeight: '600',
-    color: '#1f2937',
+    fontWeight: "600",
+    color: "#1f2937",
     marginBottom: 8,
   },
   timeBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#f3f4f6',
+    alignSelf: "flex-start",
+    backgroundColor: "#f3f4f6",
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
@@ -289,11 +299,11 @@ const styles = StyleSheet.create({
   },
   timeBadgeText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: "#6b7280",
   },
   activityMain: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 12,
   },
   activityIcon: {
@@ -302,12 +312,12 @@ const styles = StyleSheet.create({
   },
   activityTitle: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#1f2937',
+    fontWeight: "600",
+    color: "#1f2937",
   },
   tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     marginBottom: 12,
     gap: 8,
   },
@@ -318,15 +328,15 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 14,
-    fontWeight: '500',
-    color: '#4b5563',
+    fontWeight: "500",
+    color: "#4b5563",
   },
   tagTextWhite: {
-    color: 'white',
+    color: "white",
   },
   detailRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   detailIcon: {
@@ -336,11 +346,11 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: "#6b7280",
   },
   leaveTime: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 8,
     marginBottom: 16,
   },
@@ -350,15 +360,15 @@ const styles = StyleSheet.create({
   },
   leaveText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#3b82f6',
+    fontWeight: "600",
+    color: "#3b82f6",
   },
   packingContainer: {
-    backgroundColor: '#f9fafb',
+    backgroundColor: "#f9fafb",
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: "#e5e7eb",
   },
   packingIcon: {
     fontSize: 16,
@@ -366,38 +376,38 @@ const styles = StyleSheet.create({
   },
   packingTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#a855f7',
+    fontWeight: "600",
+    color: "#a855f7",
     marginBottom: 12,
   },
   packingItems: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
   },
   packingItem: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: "#e5e7eb",
   },
   packingItemText: {
     fontSize: 14,
-    color: '#374151',
+    color: "#374151",
   },
   addButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     bottom: 24,
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#6366f1',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    backgroundColor: "#6366f1",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
