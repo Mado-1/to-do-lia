@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
 import {
   Modal,
@@ -68,7 +69,11 @@ export default function AIChatModal({ visible, onClose }) {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <View style={styles.iconContainer}>
-                <Ionicons name="chatbubbles" size={24} color="#FFF" />
+                <MaterialCommunityIcons
+                  name="robot-happy"
+                  size={24}
+                  color="#FFF"
+                />
               </View>
               <View>
                 <Text style={styles.headerTitle}>AI Assistant</Text>

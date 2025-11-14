@@ -1,17 +1,21 @@
-import { Ionicons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function AIChatButton({ onPress, isOpen }) {
   return (
     <TouchableOpacity style={styles.aiButton} onPress={onPress}>
       <View style={styles.aiButtonContent}>
-        <View style={styles.iconContainer}>
-          <Ionicons name="chatbubbles" size={24} color="#FFF" />
+        <View style={styles.leftContent}>
+          <View style={styles.iconContainer}>
+            <MaterialCommunityIcons name="robot-happy" size={24} color="#FFF" />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.aiTitle}>AI Assistant</Text>
+            <Text style={styles.aiSubtitle}>Unstressable</Text>
+          </View>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.aiTitle}>AI Assistant</Text>
-          <Text style={styles.aiSubtitle}>Unstressable</Text>
-        </View>
+        <MaterialIcons name="touch-app" size={24} color="#FFF" />
       </View>
     </TouchableOpacity>
   );
@@ -34,9 +38,17 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   aiButtonContent: {
+    width: "100%",
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     gap: 12,
+  },
+  leftContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    flex: 1,
   },
   iconContainer: {
     width: 40,
