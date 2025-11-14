@@ -1,19 +1,28 @@
-import React from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../../components/Home/Header';
-import StatsGrid from '../../components/Home/StatsGrid';
-import NextUpCard from '../../components/Home/NextUpCard';
+import { useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import AIChatButton from "../../components/Home/AIChatButton";
+import AIChatModal from "../../components/Home/AIChatModal";
+import Header from "../../components/Home/Header";
+import NextUpCard from "../../components/Home/NextUpCard";
+import StatsGrid from "../../components/Home/StatsGrid";
 
 export default function Dashboard() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <ScrollView style={styles.scrollView}>
         <Header />
-        <StatsGrid />
+        <AIChatButton onPress={() => setIsModalVisible(true)} isOpen={false} />
         <NextUpCard />
+        <StatsGrid />
         <View style={{ height: 40 }} />
       </ScrollView>
+      <AIChatModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -21,7 +30,7 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: "#F9FAFB",
   },
   scrollView: {
     flex: 1,
