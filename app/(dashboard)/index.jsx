@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AIChatButton from "../../components/Home/AIChatButton";
-import AIChatModal from "../../components/Home/AIChatModal";
-import Header from "../../components/Home/Header";
+import AIChatButton from "../../components/Global/AIChatButton";
+import AIChatModal from "../../components/Global/AIChatModal";
+import Header from "../../components/Global/Header";
 import NextUpCard from "../../components/Home/NextUpCard";
 import StatsGrid from "../../components/Home/StatsGrid";
 
