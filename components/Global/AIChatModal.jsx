@@ -13,6 +13,7 @@ import {
 
 export default function AIChatModal({ visible, onClose }) {
   const [message, setMessage] = useState("");
+  const [isMuted, setIsMuted] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -81,8 +82,15 @@ export default function AIChatModal({ visible, onClose }) {
               </View>
             </View>
             <View style={styles.headerButtons}>
-              <TouchableOpacity style={styles.headerButton}>
-                <Ionicons name="volume-medium" size={20} color="#FFF" />
+              <TouchableOpacity
+                style={styles.headerButton}
+                onPress={() => setIsMuted(!isMuted)} // Toggle mute state
+              >
+                <Ionicons
+                  name={isMuted ? "volume-mute" : "volume-medium"}
+                  size={20}
+                  color="#FFF"
+                />
               </TouchableOpacity>
               <TouchableOpacity style={styles.headerButton} onPress={onClose}>
                 <Ionicons name="close" size={20} color="#FFF" />
