@@ -63,8 +63,21 @@ export default function AIChatModal({ visible, onClose }) {
       animationType="slide"
       transparent={true}
       onRequestClose={onClose}
+      statusBarTranslucent={true}
     >
-      <View style={styles.modalOverlay}>
+          <TouchableOpacity
+      style={styles.modalOverlay}
+      activeOpacity={1}
+      onPress={onClose}
+    >
+      <TouchableOpacity
+      style={{
+        justifyContent: "flex-end",
+        marginTop: "20%",
+      }}
+        activeOpacity={1}
+        onPress={(e) => e.stopPropagation()}
+      >
         <View style={styles.modalContainer}>
           {/* Header */}
           <View style={styles.header}>
@@ -84,7 +97,7 @@ export default function AIChatModal({ visible, onClose }) {
             <View style={styles.headerButtons}>
               <TouchableOpacity
                 style={styles.headerButton}
-                onPress={() => setIsMuted(!isMuted)} // Toggle mute state
+                onPress={() => setIsMuted(!isMuted)}
               >
                 <Ionicons
                   name={isMuted ? "volume-mute" : "volume-medium"}
@@ -176,7 +189,8 @@ export default function AIChatModal({ visible, onClose }) {
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
+      </TouchableOpacity>
     </Modal>
   );
 }
@@ -186,12 +200,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "flex-end",
+    zIndex: 10,
   },
   modalContainer: {
     backgroundColor: "#FFF",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    height: "90%",
+    height: "100%",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,
