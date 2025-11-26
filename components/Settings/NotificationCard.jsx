@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
 import ChannelPill from "./ChannelPill";
 
@@ -12,15 +12,45 @@ export default function NotificationCard({
   time, 
   isOn, 
   onToggle,
-  onChannelToggle // ✅ Added prop
+  onChannelToggle,
+  Channels = {},
+  defaultSwitch = false
 }) {
-
-  const [channels, setChannels] = useState({
+  const defaultChannels = {
     SMS: false,
     WhatsApp: false,
     Email: false,
-    Push: true,
-  });
+    Push: false,
+    ...Channels,
+  };
+
+  const [switchValue, setSwitchValue] = useState(defaultSwitch);
+
+  // If defaultSwitch prop changes, update the state
+  useEffect(() => {
+    setSwitchValue(defaultSwitch);
+  }, [defaultSwitch]);
+
+  const handleToggle = () => {
+    const newValue = !switchValue;
+    setSwitchValue(newValue);                // update local state
+    onToggle(newValue);                      // notify parent
+    onChannelToggle(`${title} ${newValue ? "Enabled" : "Disabled"}`); // show toast
+  };
+
+  const [channels, setChannels] = useState(defaultChannels);
+
+  // If Channels prop changes, update state
+  useEffect(() => {
+    const defaultChannels = {
+      SMS: false,
+      WhatsApp: false,
+      Email: false,
+      Push: false,
+      ...Channels,
+    };
+    setChannels(defaultChannels);
+  }, [Channels]);
 
   const toggleChannel = (channelName) => {
     setChannels((prev) => {
@@ -48,7 +78,7 @@ export default function NotificationCard({
           </View>
         </View>
 
-        <Switch value={isOn} onValueChange={onToggle} />
+        <Switch value={switchValue} onValueChange={handleToggle} />
       </View>
 
       <View style={styles.timeRow}>
@@ -60,7 +90,7 @@ export default function NotificationCard({
         <Text style={styles.deliveryText}>Delivery Channels:</Text>
         <View style={styles.pillRow}>
           {Object.entries(channels).map(([key, enabled]) => (
-            <ChannelPill 
+            <ChannelPill
               key={key}
               text={key}
               filled={enabled}
@@ -74,12 +104,7 @@ export default function NotificationCard({
 }
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 14,
-    marginBottom: 20,
-  },
+  card: { backgroundColor: "#fff", padding: 16, borderRadius: 14, marginBottom: 20 },
   cardHeader: { flexDirection: "row", justifyContent: "space-between" },
   cardTitleRow: { flexDirection: "row", alignItems: "center", width: "80%" },
   cardTitle: { fontSize: 17, fontWeight: "600" },

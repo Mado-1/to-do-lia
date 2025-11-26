@@ -46,6 +46,8 @@ export default function NotificationSettings({ onChannelToast }) {
           isOn={urgentOn}
           onToggle={setUrgentOn}
           onChannelToggle={onChannelToast}
+          defaultSwitch={true}
+          Channels={{ SMS: true, WhatsApp: true, Email: true, Push: true }}
         />
 
         <NotificationCard
@@ -56,6 +58,8 @@ export default function NotificationSettings({ onChannelToast }) {
           isOn={briefingOn}
           onToggle={setBriefingOn}
           onChannelToggle={onChannelToast}
+          defaultSwitch={true}
+          Channels={{ SMS: true, Push: true }}
         />
 
         <NotificationCard
@@ -66,6 +70,8 @@ export default function NotificationSettings({ onChannelToast }) {
           isOn={weeklyOn}
           onToggle={setWeeklyOn}
           onChannelToggle={onChannelToast}
+          defaultSwitch={true}
+          Channels={{ SMS: true, Email: true, Push: true }}
         />
 
         <NotificationCard
@@ -77,6 +83,8 @@ export default function NotificationSettings({ onChannelToast }) {
           isOn={packingOn}
           onToggle={setPackingOn}
           onChannelToggle={onChannelToast}
+          defaultSwitch={true}
+          Channels={{ SMS: true, WhatsApp: true, Email: true, Push: true }}
         />
 
         <NotificationCard
@@ -87,6 +95,8 @@ export default function NotificationSettings({ onChannelToast }) {
           isOn={conflictOn}
           onToggle={setConflictOn}
           onChannelToggle={onChannelToast}
+          defaultSwitch={true}
+          Channels={{ SMS: true, WhatsApp: true, Email: true, Push: true }}
         />
       </ScrollView>
     </View>
