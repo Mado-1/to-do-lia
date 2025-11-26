@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Header() {
+  const router  = useRouter();
   return (
     <View style={styles.header}>
       <View>
@@ -11,9 +13,9 @@ export default function Header() {
           at a time
         </Text>
       </View>
-      <TouchableOpacity style={styles.settingsButton}>
-        <Ionicons name="settings-outline" size={24} color="#666" />
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.settingsButton} onPress={() => router.push("/settings")}>
+      <Ionicons name="settings-outline" size={24} color="#666" />
+    </TouchableOpacity>
     </View>
   );
 }
