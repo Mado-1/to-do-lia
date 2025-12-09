@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import AddMemberModal from '../AddMemberModal';
 
-const FamilySection = ({ onAddMember }) => {
-  const familyMembers = [
+const FamilySection = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  
+  // Gör familyMembers till state så vi kan uppdatera den
+  const [familyMembers, setFamilyMembers] = useState([
     {
       id: 1,
       name: 'Emma',
@@ -25,18 +29,24 @@ const FamilySection = ({ onAddMember }) => {
       nextActivity: 'Swimming Lesson',
       nextActivityDate: 'Thu, Nov 27, 05:30 PM'
     }
-  ];
+  ]);
 
   const sharedActivities = {
     count: 1,
     description: 'Activities that involve multiple family members'
   };
 
+  // Uppdatera overview dynamiskt baserat på antal familjemedlemmar
   const overview = {
-    totalMembers: 2,
+    totalMembers: familyMembers.length,
     activeActivities: 5,
     thisWeek: 5,
     totalHours: '6h'
+  };
+
+  // Funktion för att lägga till ny familjemedlem
+  const handleAddMember = (newMember) => {
+    setFamilyMembers([...familyMembers, newMember]);
   };
 
   return (
@@ -50,7 +60,10 @@ const FamilySection = ({ onAddMember }) => {
             <Text style={styles.headerSubtitle}>Manage your family and view individual schedules</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.addButton} onPress={onAddMember}>
+        <TouchableOpacity 
+          style={styles.addButton} 
+          onPress={() => setModalVisible(true)}
+        >
           <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -138,6 +151,13 @@ const FamilySection = ({ onAddMember }) => {
       </View>
 
       <View style={{ height: 40 }} />
+
+      {/* Add Member Modal */}
+      <AddMemberModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onAddMember={handleAddMember}
+      />
     </ScrollView>
   );
 };
