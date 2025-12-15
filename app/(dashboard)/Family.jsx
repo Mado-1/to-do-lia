@@ -70,14 +70,29 @@ const FamilySection = () => {
 
       {/* Family Members */}
       {familyMembers.map((member) => (
-        <TouchableOpacity key={member.id} style={styles.memberCard}>
-          <View style={[styles.avatar, { backgroundColor: member.color }]}>
-            <Text style={styles.avatarText}>{member.initials}</Text>
-          </View>
-          
-          <View style={styles.memberContent}>
-            <Text style={styles.memberName}>{member.name}</Text>
-            <Text style={styles.memberRole}>{member.role}</Text>
+        <View key={member.id} style={styles.memberCardContainer}>
+          <TouchableOpacity style={styles.memberCard}>
+            <View style={[styles.avatar, { backgroundColor: member.color }]}>
+              <Text style={styles.avatarText}>{member.initials}</Text>
+            </View>
+            
+            <View style={styles.memberContent}>
+              <View style={styles.memberHeader}>
+                <View>
+                  <Text style={styles.memberName}>{member.name}</Text>
+                  <Text style={styles.memberRole}>{member.role}</Text>
+                </View>
+                <TouchableOpacity 
+                  style={styles.deleteButton}
+                  onPress={() => {
+                    if (confirm(`Remove ${member.name} from family?`)) {
+                      setFamilyMembers(familyMembers.filter(m => m.id !== member.id));
+                    }
+                  }}
+                >
+                  <Text style={styles.deleteButtonText}>🗑️</Text>
+                </TouchableOpacity>
+              </View>
             
             <View style={styles.statsRow}>
               <View style={styles.stat}>
@@ -102,6 +117,7 @@ const FamilySection = () => {
             </View>
           </View>
         </TouchableOpacity>
+        </View>
       ))}
 
       {/* Shared Activities */}
@@ -220,12 +236,29 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 16,
     borderRadius: 12,
-    marginBottom: 16,
+    flex: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 2,
+  },
+  memberCardContainer: {
+    marginBottom: 16,
+  },
+  memberHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  deleteButton: {
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: '#fee2e2',
+  },
+  deleteButtonText: {
+    fontSize: 18,
   },
   sharedCard: {
     flexDirection: 'row',
